@@ -483,7 +483,7 @@ async def get_snapshot_crypto_book(
 
 @poly_mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
 async def get_snapshot_indices(
-    ticker: str,
+    ticker_any_of: Optional[Union[str, List[str]]] = None,
     params: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
@@ -491,7 +491,7 @@ async def get_snapshot_indices(
     """
     try:
         results = polygon_client.get_snapshot_indices(
-            ticker=ticker, params=params, raw=True
+            ticker_any_of=ticker_any_of, params=params, raw=True
         )
 
         data_str = results.data.decode("utf-8")
